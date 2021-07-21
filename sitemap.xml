@@ -3,42 +3,29 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://fran.wang/categories/</loc>
-    <lastmod>2021-07-19T10:10:41+08:00</lastmod>
+  </url><url>
+    <loc>http://fran.wang/tags/JAVA/</loc>
+  </url><url>
+    <loc>http://fran.wang/categories/Java-Virtual-Machine/</loc>
+  </url><url>
+    <loc>http://fran.wang/tags/JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA/</loc>
+  </url><url>
+    <loc>http://fran.wang/Java-Virtual-Machine/</loc>
+  </url><url>
+    <loc>http://fran.wang/Java-Virtual-Machine/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/</loc>
+  </url><url>
+    <loc>http://fran.wang/tags/JVM/</loc>
+  </url><url>
+    <loc>http://fran.wang/JVM%E7%BA%A7%E9%94%81/</loc>
+  </url><url>
+    <loc>http://fran.wang/JVM%E7%BA%A7%E9%94%81/JVM%E7%BA%A7%E9%94%81%E7%AC%AC%E4%B8%80%E7%AF%87/</loc>
   </url><url>
     <loc>http://fran.wang/</loc>
-    <lastmod>2021-07-19T10:10:41+08:00</lastmod>
   </url><url>
-    <loc>http://fran.wang/tags/one/</loc>
-    <lastmod>2021-07-19T10:10:41+08:00</lastmod>
-  </url><url>
-    <loc>http://fran.wang/categories/post/</loc>
-    <lastmod>2021-07-19T10:10:41+08:00</lastmod>
+    <loc>http://fran.wang/tags/Synchronized/</loc>
   </url><url>
     <loc>http://fran.wang/tags/</loc>
-    <lastmod>2021-07-19T10:10:41+08:00</lastmod>
   </url><url>
-    <loc>http://fran.wang/tags/two/</loc>
-    <lastmod>2021-07-19T10:10:41+08:00</lastmod>
-  </url><url>
-    <loc>http://fran.wang/post/</loc>
-    <lastmod>2021-07-19T10:10:41+08:00</lastmod>
-  </url><url>
-    <loc>http://fran.wang/post/frist/one/</loc>
-    <lastmod>2021-07-19T10:10:41+08:00</lastmod>
-  </url><url>
-    <loc>http://fran.wang/post/two/two/</loc>
-    <lastmod>2021-07-19T10:10:41+08:00</lastmod>
-  </url><url>
-    <loc>http://fran.wang/tags/backend/</loc>
-    <lastmod>2021-07-19T10:10:32+08:00</lastmod>
-  </url><url>
-    <loc>http://fran.wang/tags/hugo/</loc>
-    <lastmod>2021-07-19T10:10:32+08:00</lastmod>
-  </url><url>
-    <loc>http://fran.wang/categories/tech/</loc>
-    <lastmod>2021-07-19T10:10:32+08:00</lastmod>
-  </url><url>
-    <loc>http://fran.wang/about/</loc>
-    <lastmod>2021-07-19T10:10:32+08:00</lastmod>
+    <loc>http://fran.wang/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/</loc>
   </url>
 </urlset>

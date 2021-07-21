@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.85.0" />
+
+
+
+<link rel="canonical" href="http://fran.wang/Java-Virtual-Machine/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/">
+
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <title>Java虚拟机第一篇 - Loongzh</title>
+    
+<meta name="description" content="前言 2019年初购买了周志明《深入理解Java虚拟机（第二版）》，由于种种原因（懒）闲置至今，刷到周老师新浪微博都有出道第三版了(尬尬尬),">
+
+<meta property="og:title" content="Java虚拟机第一篇 - Loongzh">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://fran.wang/Java-Virtual-Machine/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/">
+<meta property="og:image" content="http://fran.wang/images/default.png">
+<meta property="og:site_name" content="Loongzh">
+<meta property="og:description" content="前言 2019年初购买了周志明《深入理解Java虚拟机（第二版）》，由于种种原因（懒）闲置至今，刷到周老师新浪微博都有出道第三版了(尬尬尬),">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Loongzh">
+<meta name="twitter:url" content="http://fran.wang/Java-Virtual-Machine/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/">
+<meta name="twitter:title" content="Java虚拟机第一篇 - Loongzh">
+<meta name="twitter:description" content="前言 2019年初购买了周志明《深入理解Java虚拟机（第二版）》，由于种种原因（懒）闲置至今，刷到周老师新浪微博都有出道第三版了(尬尬尬),">
+<meta name="twitter:image" content="http://fran.wang/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"http:\/\/fran.wang\/"
+    },
+    "headline": "Java虚拟机第一篇 - Loongzh",
+    "image": {
+      "@type": "ImageObject",
+      "url": "http:\/\/fran.wang\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "0001-01-01T00:00:00JST",
+    "dateModified": "0001-01-01T00:00:00JST",
+    "author": {
+      "@type": "Person",
+      "name": "Loongzh"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Loongzh",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "http:\/\/fran.wang\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": "前言 2019年初购买了周志明《深入理解Java虚拟机（第二版）》，由于种种原因（懒）闲置至今，刷到周老师新浪微博都有出道第三版了(尬尬尬),"
+  }
+</script>
+
+
+    <link href="http://fran.wang/css/styles.css" rel="stylesheet">
+    
+
+  </head>
+
+  <body>
+    
+    
+    
+
+    <header class="l-header">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://fran.wang/">Loongzh</a>
+          </div>
+
+          
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="https://github.com/loongzh/blog">GitHub</a></li>
+              
+              
+              
+              <li><a href="https://blog.csdn.net/BuFanQi_Info">CSDN</a></li>
+              
+              
+            </ul>
+            
+          </div>
+          
+
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container">
+        
+<div class="row">
+  <div class="col-md-8">
+
+    <nav class="p-crumb">
+      <ol class="breadcrumb">
+        <li><a href="http://fran.wang/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+        
+        <li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="http://fran.wang/Java-Virtual-Machine/" itemprop="url"><span itemprop="title">Java Virtual Machine</span></a></li>
+        
+        <li class="active">Java虚拟机第一篇</li>
+      </ol>
+    </nav>
+
+    <article class="single">
+  <header>
+    <ul class="p-facts">
+      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="0001-01-01T00:00:00JST">Jan 1, 0001</time></li>
+      <li><i class="fa fa-bookmark" aria-hidden="true"></i><a href="http://fran.wang/Java-Virtual-Machine/">Java Virtual Machine</a></li>
+      
+    </ul>
+
+    <h1 class="title">Java虚拟机第一篇</h1>
+  </header>
+
+  
+
+  <div class="article-body"><h1 id="前言">前言</h1>
+<p>2019年初购买了周志明《<a href="http://www.hzcourse.com/web/refbook/detail/5070/208">深入理解Java虚拟机（第二版）</a>》，由于种种原因（懒）闲置至今，刷到<a href="https://weibo.com/icyfenix?is_all=1">周老师</a>新浪微博都有出道第三版了(尬尬尬),下面对知识点做一些整理(补补补)</p>
+<h1 id="目标">目标</h1>
+<blockquote>
+<p>虚拟机<br>
+Read：自动运行特性原理<br>
+Write：<strong>适</strong>运行和<strong>自优化</strong>代码</p>
+</blockquote>
+<h2 id="场景">场景</h2>
+<ul>
+<li><del>入门学习</del> -程序<strong>正常</strong>运行</li>
+<li>生产环境-<strong>性能</strong>和<strong>稳定</strong></li>
+</ul>
+<h2 id="人群">人群</h2>
+<ul>
+<li><del>入门和初级(0+)</del></li>
+<li>中级和高级(3+)</li>
+</ul>
+</div>
+
+  <footer class="article-footer">
+    
+    
+    
+    <section class="bordered">
+      <header>
+        <div class="panel-title">CATEGORIES</div>
+      </header>
+      <div>
+        <ul class="p-terms">
+          
+          <li><a href="http://fran.wang/categories/Java-Virtual-Machine/">Java Virtual Machine</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+    
+    <section class="bordered">
+      <header>
+        <div class="panel-title">TAGS</div>
+      </header>
+      <div>
+        <ul class="p-terms">
+          
+          <li><a href="http://fran.wang/tags/JVM/">JVM</a></li>
+          
+          <li><a href="http://fran.wang/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/">虚拟机</a></li>
+          
+          <li><a href="http://fran.wang/tags/JAVA/">JAVA</a></li>
+          
+          <li><a href="http://fran.wang/tags/JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA/">JAVA虚拟机</a></li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    
+  </footer>
+
+</article>
+
+
+    
+  </div>
+
+  <div class="col-md-4">
+    
+<aside class="l-sidebar">
+
+  <section class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">LATESTS</div>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://fran.wang/Java-Virtual-Machine/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AC%AC%E4%B8%80%E7%AF%87/" class="list-group-item">Java虚拟机第一篇</a>
+      
+      <a href="http://fran.wang/JVM%E7%BA%A7%E9%94%81/JVM%E7%BA%A7%E9%94%81%E7%AC%AC%E4%B8%80%E7%AF%87/" class="list-group-item">JVM级锁第一篇</a>
+      
+    </div>
+  </section>
+
+  
+  <section class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">CATEGORY</div>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://fran.wang/categories/Java-Virtual-Machine" class="list-group-item">Java-Virtual-Machine</a>
+      
+    </div>
+  </section>
+  
+  <section class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">TAG</div>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://fran.wang/tags/JAVA" class="list-group-item">JAVA</a>
+      
+      <a href="http://fran.wang/tags/JVM" class="list-group-item">JVM</a>
+      
+      <a href="http://fran.wang/tags/JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA" class="list-group-item">JAVA虚拟机</a>
+      
+      <a href="http://fran.wang/tags/Synchronized" class="list-group-item">Synchronized</a>
+      
+      <a href="http://fran.wang/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA" class="list-group-item">虚拟机</a>
+      
+    </div>
+  </section>
+  
+
+</aside>
+
+
+  </div>
+</div>
+
+      </div>
+    </main>
+
+    <footer class="l-footer">
+      <div class="container">
+        <p><span class="h-logo">&copy; Loongzh</span></p>
+        <aside>
+          <p>Powered by <a href="https://gohugo.io/">Hugo</a>.</p>
+          <p><a href="https://github.com/dim0627/hugo_theme_beg">Beg</a> designed by <a href="http://yet.unresolved.xyz/">Daisuke Tsuji</a>.</p>
+        </aside>
+      </div>
+    </footer>
+
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+
